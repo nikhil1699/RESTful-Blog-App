@@ -1,4 +1,4 @@
-var bodyParser = require("body-parser"),
+let bodyParser = require("body-parser"),
 methodOverride = require("method-override"),
 expressSanitizer = require("express-sanitizer"),
 mongoose       = require("mongoose"),
@@ -14,13 +14,13 @@ app.use(expressSanitizer());
 app.use(methodOverride("_method"));
 
 // MONGOOSE/MODEL CONFIG
-var blogSchema = new mongoose.Schema({
+let blogSchema = new mongoose.Schema({
     title: String,
     image: String,
     body: String,
     created: {type: Date, default: Date.now}
 });
-var Blog = mongoose.model("Blog", blogSchema);
+let Blog = mongoose.model("Blog", blogSchema);
 
 // RESTFUL ROUTES
 
