@@ -1,4 +1,4 @@
-let bodyParser = require("body-parser"),
+const bodyParser = require("body-parser"),
 methodOverride = require("method-override"),
 expressSanitizer = require("express-sanitizer"),
 mongoose       = require("mongoose"),
@@ -85,7 +85,7 @@ app.get("/blogs/:id/edit", function(req, res){
 
 // UPDATE ROUTE
 app.put("/blogs/:id", function(req, res){
-    req.body.blog.body = req.sanitize(req.body.blog.body)
+   req.body.blog.body = req.sanitize(req.body.blog.body)
    Blog.findByIdAndUpdate(req.params.id, req.body.blog, function(err, updatedBlog){
       if(err){
           res.redirect("/blogs");
@@ -106,6 +106,12 @@ app.delete("/blogs/:id", function(req, res){
        }
    })
    //redirect somewhere
+});
+
+//POST ROUTE
+app.post("/blogs/:id", function(req, res, next) {
+    res.statusCode = 403;
+    res.end('POST operation not supported on /blogs/' + req.params.id);
 });
 
 app.listen(3000, process.env.IP, function(){
